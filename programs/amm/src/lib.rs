@@ -22,7 +22,9 @@ pub mod amm {
         authority:Option<Pubkey>,
     ) -> Result<()> {
 
-        ctx.accounts.init(seed, fee, authority, ctx.bumps)
+        ctx.accounts.init(seed, fee, authority, ctx.bumps);
+
+        Ok(())
     }
 
        pub fn deposit(
@@ -32,7 +34,9 @@ pub mod amm {
         max_y: u64,
     ) -> Result<()> {
 
-        ctx.accounts.deposit(amount, max_x, max_y)
+        ctx.accounts.deposit(amount, max_x, max_y);
+
+        Ok(())
     }
 }
 

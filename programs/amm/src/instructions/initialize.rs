@@ -6,7 +6,6 @@ use anchor_spl::{
 
 use crate::state::Config;
 
-
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct Initialize<'info> {
@@ -46,7 +45,6 @@ pub struct Initialize<'info> {
         bump,
         space = 8 + Config::INIT_SPACE,
     )]
-
     pub config: Account<'info, Config>,
     pub token_program: Program<'info, Token>,
     pub associated_token_program: Program<'info, AssociatedToken>,
@@ -54,7 +52,7 @@ pub struct Initialize<'info> {
 }
 
 impl<'info>Initialize<'info> {
-    pub fn init(&mut self, seed: u64, fee: u16, authority: Option<Pubkey>, bumps: InitializeBumps) {
+    pub fn init(&mut self, seed: u64, fee: u16, authority: Option<Pubkey>, bumps: InitializeBumps) -> Result<()> {
 
         self.config.set_inner(Config {
             seed,
@@ -67,7 +65,7 @@ impl<'info>Initialize<'info> {
             lg_bump: bumps.mint_lp,
         });
 
-        
+        Ok(())
 
     }
 }

@@ -14,27 +14,32 @@ pub struct Deposit<'info> {
     pub mint_x: Account<'info, Mint>,
     pub mint_y: Account<'info, Mint>,
     #[account(
+        mut,
         seeds = [b"lp", config.key().as_ref()],
         bump = config.lg_bump,
     )]
     pub mint_lp: Account<'info, Mint>,
      #[account(
+        mut,
         associated_token::mint = mint_x,
         associated_token::authority = config,
     )]
     pub vault_x: Account<'info, TokenAccount>,
     #[account(
+        mut,
         associated_token::mint = mint_y,
         associated_token::authority = config,
     )]
     pub vault_y: Account<'info, TokenAccount>,
 
       #[account(
+        mut,
         associated_token::mint = mint_x,
         associated_token::authority = user,
     )]
     pub user_x: Account<'info, TokenAccount>,
     #[account(
+        mut,
         associated_token::mint = mint_y,
         associated_token::authority = user,
     )]
